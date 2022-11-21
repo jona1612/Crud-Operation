@@ -5,6 +5,7 @@ const DB = require("../Models/employee")
 
 router.post('/employee', async (req, res) => {
     try {
+
          let doc = await DB.create({
             // user_id: req.body.User_ID,
             firstName: req.body.firstName,
@@ -19,6 +20,7 @@ router.post('/employee', async (req, res) => {
     }
 })
 
+
 router.get('/employeedetails', async (req, res) => {
     try {
         let employeeDetails = await DB.find();
@@ -28,7 +30,8 @@ router.get('/employeedetails', async (req, res) => {
     }
 })
 
-router.delete('/:id', (req, res) => {
+
+router.delete('/employee/:id', (req, res) => {
     try {
         DB.findByIdAndDelete(req.params.id, function (err, docs) {
             if (err) {
@@ -43,7 +46,7 @@ router.delete('/:id', (req, res) => {
 })
 
 
-router.put('/:id', (req, res) => {
+router.put('/employee/:id', (req, res) => {
     try {
         DB.findByIdAndUpdate(req.params.id, { ...req.body }, { returnDocument: 'after' }, function (err, docs) {
             if (err) {
@@ -56,5 +59,6 @@ router.put('/:id', (req, res) => {
         res.status(500).send(Error)
     }
 })
+
 
 module.exports = router
